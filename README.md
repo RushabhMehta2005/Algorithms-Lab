@@ -13,8 +13,6 @@ The **Design and Analysis of Algorithms (DAA)** course focuses on various algori
 - Divide and Conquer
 - Greedy Methods
 - Dynamic Programming
-- Graph Algorithms
-- NP-Complete and NP-Hard Problems
 
 ## Algorithms Covered
 
@@ -31,6 +29,10 @@ The following algorithmic topics are implemented in this repository:
    - Fractional Knapsack
    - Huffman Coding
 
+4. **Dynamic Programming**
+   - Longest Common Subsequence
+   - Matrix Chain Multiplication
+   
 ## Repository Structure
 - Each lab is placed in a separate directory.
 - Python scripts are used to implement the algorithms, but other languages may also be included if needed.
