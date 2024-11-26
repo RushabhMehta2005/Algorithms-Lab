@@ -1,7 +1,5 @@
 import csv
 import random
-import time
-from itertools import combinations
 import os
 
 class Item:
@@ -9,7 +7,7 @@ class Item:
         self.value = value
         self.weight = weight
         self.shelf_life = shelf_life
-        self.ratio = value / weight  # Value-to-weight ratio
+        self.ratio = value / (weight * shelf_life)
 
 def generate_csv_files(num_files=5, num_items=20, folder="items_data"):
     os.makedirs(folder, exist_ok=True)
@@ -45,21 +43,6 @@ def greedy_knapsack(items, capacity):
             break
     return total_value
 
-
-def brute_force_knapsack(items, capacity):
-    start_time = time.time()
-    max_value = 0
-    n = len(items)
-    for r in range(1, n + 1):
-        for combo in combinations(items, r):
-            if time.time() - start_time > 25:
-                raise TimeoutError("Brute force solution time limit exceeded.")
-            total_weight = sum(item.weight for item in combo)
-            total_value = sum(item.value for item in combo)
-            if total_weight <= capacity:
-                max_value = max(max_value, total_value)
-    return max_value
-
 # Generate CSV files
 generate_csv_files(num_files=5, num_items=20)
 
@@ -74,11 +57,4 @@ for i in range(1, 6):
     
     max_value_greedy = greedy_knapsack(items, capacity)
     max_value_greedy = round(max_value_greedy, 3)
-    print(f"File {i} - Maximum value (Greedy): {max_value_greedy}")
-    
-    try:
-        max_value_brute_force = brute_force_knapsack(items, capacity)
-        max_value_brute_force = round(max_value_brute_force, 3)
-        print(f"File {i} - Maximum value (Brute Force): {max_value_brute_force}")
-    except TimeoutError as e:
-        print(f"File {i} - Brute force solution: {e}")
+    print(f"File {i} - Maximum value: {max_value_greedy}")
